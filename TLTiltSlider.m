@@ -50,7 +50,7 @@ static const CGFloat kShadowMargin = 1.0f;
 {
     [self setMinimumTrackImage:[[UIImage imageNamed:@"higlightedBarBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 0)] forState:UIControlStateNormal];
     [self setMaximumTrackImage:[[UIImage imageNamed:@"trackBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 4)] forState:UIControlStateNormal];
-    
+
     // Set up our motion updates
     [self setupMotionDetection];
 }
@@ -60,7 +60,10 @@ static const CGFloat kShadowMargin = 1.0f;
 -(void)setupMotionDetection
 {
     NSAssert(self.motionManager == nil, @"Motion manager being set up more than once.");
-    
+
+	// Since tilt is enabled by default, we need to set this ivar explicitly
+	_tiltEnabled = YES;
+
     // Set up a motion manager and start motion updates, calling deviceMotionDidUpdate: when updated.
     self.motionManager = [[CMMotionManager alloc] init];
     
@@ -167,15 +170,15 @@ static const CGFloat kShadowMargin = 1.0f;
 #pragma mark - Overridden Properties
 
 // Updates the ivar disables (or enables) the motion manager
--(void)setIsTiltEnabled:(BOOL)isTiltEnabled
+-(void)setTiltEnabled:(BOOL)tiltEnabled
 {
-    _isTiltEnabled = isTiltEnabled;
+    _tiltEnabled = tiltEnabled;
     
-    if (isTiltEnabled && ![self.motionManager isDeviceMotionActive])
+    if (tiltEnabled && ![self.motionManager isDeviceMotionActive])
     {
         [self startDeviceMotionUpdates];
     }
-    else if (!isTiltEnabled && [self.motionManager isDeviceMotionActive])
+    else if (!tiltEnabled && [self.motionManager isDeviceMotionActive])
     {
         [self.motionManager stopDeviceMotionUpdates];
     }

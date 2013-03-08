@@ -30,7 +30,7 @@ Alternatively to instantiating the class programmatically, you can also use Inte
 
 You can also disable the tilt updates for older devices:
 
-    slider.isTiltEnabled = NO;
+    slider.tiltEnabled = NO;
 
 Requirements
 ------------

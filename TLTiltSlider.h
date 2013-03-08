@@ -20,6 +20,6 @@
 ///
 /// `YES` by default. Useful to disable if this is adversly affecting
 /// screen refresh rates on older devices.
-@property (nonatomic, assign) BOOL isTiltEnabled;
+@property (nonatomic, assign, getter = tiltIsEnabled) BOOL tiltEnabled;
 
 @end

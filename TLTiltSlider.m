@@ -117,9 +117,21 @@ static const CGFloat kShadowMargin = 1.0f;
             if (adjacent == 0) adjacent = 0.001; // avoid division by zero
             CGFloat angle = atan(opposite/adjacent);
             // We want value to have a range from [1.5 ... 2.0].
-            CGFloat value = 1.5f + 0.5f * cos(roll);
-            //data[offset] will have a range of [55 ... 255].
-            data[offset] = abs(cos(angle * value + pitch + M_PI_4) * 200) + 55;
+            CGFloat value = 1.5f + 0.5f * cos(2*roll);
+            //data[offset] will have a range of [127 ... 255].
+            data[offset] = abs(cos((angle * value + 2*pitch)) * 128) + 127;
+            
+            CGFloat a = (opposite+0.5);
+            CGFloat b = (adjacent+0.5);
+            
+            CGFloat distance = sqrtf(a*a + b*b);
+            NSUInteger roundedDistance = lrintf(distance);
+            
+            if (roundedDistance % 2 == 0)
+            {
+                data[offset] -= 20 * fabsf(roundedDistance - distance);
+            }
+            
             offset += components * bytesPerComponent;
         }
     }

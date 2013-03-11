@@ -13,6 +13,10 @@ How to Use
 
 Drag `TLTiltSlider.h` and `TLTiltSlider.m`, as well as the images in the `Resources` directory, into your project. Make sure to [link against](http://stackoverflow.com/questions/3352664/how-to-add-existing-frameworks-in-xcode-4) the Core Motion framework. 
 
+Alternatively, you can use [CocoaPods](http://cocoapods.org):
+
+    pod search TLTiltSlider
+
 Create an instance of `TLTiltSlider` and add it to a view hierarchy. The `UISlider` superclass will centre itself vertically within the view; optimal sizes are 23pt or greater. 
 
     TLTiltHighlightView *slider = [[TLTiltSlider alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 23)];
@@ -26,7 +30,7 @@ Alternatively to instantiating the class programmatically, you can also use Inte
 
 You can also disable the tilt updates for older devices:
 
-    slider.isTiltEnabled = NO;
+    slider.tiltEnabled = NO;
 
 Requirements
 ------------
